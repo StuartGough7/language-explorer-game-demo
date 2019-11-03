@@ -60,13 +60,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ConfirmGameOver()
+    public void ConfirmGameOver() // activated when player hits the replay button
     {
-        // activated when player hits the replay button
+        OnGameOverConfirmed(); // event
+        scoreText.text = "0";
+        SetPageState(PageState.Start);
     }
 
-    public void StartGame()
+    public void StartGame() // activated when player hits the play button
     {
-        // activated when player hits the play button
+        SetPageState(PageState.Countdown);
     }
 }
