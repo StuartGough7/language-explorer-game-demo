@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 276989015}
   - component: {fileID: 276989017}
   - component: {fileID: 276989016}
+  - component: {fileID: 276989018}
   m_Layer: 5
   m_Name: CountDownText
   m_TagString: Untagged
@@ -197,6 +198,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276989014}
   m_CullTransparentMesh: 0
+--- !u!114 &276989018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276989014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d6dd2fe84c67f42a59eafdc1052adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &508506674
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2825, y: 0.15529627}
   m_AnchorMax: {x: 0.7175001, y: 0.22459255}
-  m_AnchoredPosition: {x: 0, y: 0.2000122}
+  m_AnchoredPosition: {x: 0, y: 0.25}
   m_SizeDelta: {x: 0.76000977, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &571828792
@@ -1259,9 +1272,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290e13171f0ba3b41a03de6453b46c8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameInstance: {fileID: 0}
   tapForce: 200
   tiltSmooth: 2
-  starPos: {x: 0, y: 0, z: 0}
+  starPos: {x: -2, y: 0, z: 0}
 --- !u!1 &1718691928
 GameObject:
   m_ObjectHideFlags: 0
