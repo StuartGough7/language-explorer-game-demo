@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     public static event GameDelegate OnGameStarted;
     public static event GameDelegate OnGameOverConfirmed;
 
-
     public static GameManager Instance; // This creates a singleton reference for other scripts to access all the public variables on this class
     public GameObject startPage;
     public GameObject countPage;
     public GameObject gameOverPage;
     public Text scoreText;
+
+    int score = 0;
+    bool gameOver = false;
 
     enum PageState
     {
@@ -24,10 +26,46 @@ public class GameManager : MonoBehaviour
         Countdown
     }
 
-    int score = 0;
-    bool gameOver = false;
-    public bool GameOver { get { return gameOver; } }
+    private void OnEnable()
+    {
+        CountdownText.OnCountdownFinished += OnCountdownFinished; // creates a subscription to the CountdownText script and the Oncountdown event within that script
+        TapController.OnPlayerScored += OnPlayerScored; // creates a subscription to the CountdownText script and the Oncountdown event within that script
+        TapController.OnPlayerDied += OnPlayerDied; // creates a subscription to the CountdownText script and the Oncountdown event within that script
+    }
 
+    private void OnDisable()
+    {
+        CountdownText.OnCountdownFinished -= OnCountdownFinished; // removes subscription
+        TapController.OnPlayerScored -= OnPlayerScored; // removes subscription
+        TapController.OnPlayerDied -= OnPlayerDied; // removes subscription
+    }
+
+    void OnCountdownFinished()
+    {
+        SetPageState(PageState.None);
+        OnGameStarted(); // event sent to TapConmtroller
+        score = 0;
+        gameOver = false;
+    }
+
+    void OnPlayerScored()
+    {
+        score++;
+        scoreText.text = score.ToString();
+    }
+
+    void OnPlayerDied()
+    {
+        gameOver = true;
+        int savedScore = PlayerPrefs.GetInt("HighScore");
+        if(score > savedScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+        SetPageState(PageState.GameOver);
+    }
+
+    public bool GameOver { get { return gameOver; } }
     private void Awake()
     {
         Instance = this; // ties the instance refernce to this class
@@ -47,12 +85,12 @@ public class GameManager : MonoBehaviour
                 countPage.SetActive(false);
                 gameOverPage.SetActive(false);
                 break;
-            case PageState.GameOver:
+            case PageState.Countdown:
                 startPage.SetActive(false);
                 countPage.SetActive(true);
                 gameOverPage.SetActive(false);
                 break;
-            case PageState.Countdown:
+            case PageState.GameOver:
                 startPage.SetActive(false);
                 countPage.SetActive(false);
                 gameOverPage.SetActive(true);
@@ -62,7 +100,7 @@ public class GameManager : MonoBehaviour
 
     public void ConfirmGameOver() // activated when player hits the replay button
     {
-        OnGameOverConfirmed(); // event
+        OnGameOverConfirmed(); // event sent to TapConmtroller
         scoreText.text = "0";
         SetPageState(PageState.Start);
     }
