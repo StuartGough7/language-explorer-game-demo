@@ -13,6 +13,10 @@ public class TapController : MonoBehaviour
     public float tapForce = 200;
     public float tiltSmooth = 5;
     public Vector3 starPos;
+    public AudioSource tapSound;
+    public AudioSource scoreSound;
+    public AudioSource dieSound;
+
 
     private Rigidbody2D rigidBody; // you dont need to explicitly say private
     Quaternion downRotation;
@@ -32,6 +36,7 @@ public class TapController : MonoBehaviour
         if (gameInstance.GameOver) return;
         if (Input.GetMouseButtonDown(0))
         {
+            tapSound.Play();
             transform.rotation = forwardRotation;
             rigidBody.velocity = Vector2.zero; // If you dont add this the tap has to fight against the current velocity and wont do enough. This makes the velocity 0 and the bounce more snappy
             rigidBody.AddForce(Vector2.up * tapForce, ForceMode2D.Force); // The second argument of Force mode has an impulse option as well. Force is the default and is optional
@@ -68,10 +73,12 @@ public class TapController : MonoBehaviour
     {
         if(collision.tag == "ScoreZone")
         {
+            scoreSound.Play();
             OnPlayerScored(); // event sent to GameManager
         }     
         if(collision.tag == "DeadZone")
         {
+            dieSound.Play();
             rigidBody.simulated = false; // freeze the character
             OnPlayerDied(); // event sent to GameManager  register dead event
         }
