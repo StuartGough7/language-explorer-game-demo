@@ -24,6 +24,7 @@ public class TapController : MonoBehaviour
         downRotation = Quaternion.Euler(0, 0, -80);
         forwardRotation = Quaternion.Euler(0, 0, 35);
         gameInstance = GameManager.Instance;
+        rigidBody.simulated = false;
     }
 
     private void Update()

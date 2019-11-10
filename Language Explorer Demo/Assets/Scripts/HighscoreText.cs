@@ -11,7 +11,7 @@ public class HighscoreText : MonoBehaviour
     private void OnEnable() // we use this instead of start beacus we need to re check the high score every time the screen shows not just on mount
     {
         highScore = GetComponent<Text>();
-        highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
+        highScore.text = "Highscore: " + PlayerPrefs.GetInt("HighScore").ToString();
         
     }
 

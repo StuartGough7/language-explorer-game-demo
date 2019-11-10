@@ -15,8 +15,6 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPage;
     public Text scoreText;
 
-    int score = 0;
-    bool gameOver = false;
 
     enum PageState
     {
@@ -26,6 +24,10 @@ public class GameManager : MonoBehaviour
         Countdown
     }
 
+    int score = 0;
+    bool gameOver = true;
+    public bool GameOver { get { return gameOver; } }
+    public int Score { get { return score; } }
     private void OnEnable()
     {
         CountdownText.OnCountdownFinished += OnCountdownFinished; // creates a subscription to the CountdownText script and the Oncountdown event within that script
@@ -65,10 +67,17 @@ public class GameManager : MonoBehaviour
         SetPageState(PageState.GameOver);
     }
 
-    public bool GameOver { get { return gameOver; } }
     private void Awake()
     {
-        Instance = this; // ties the instance refernce to this class
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void SetPageState(PageState state)
