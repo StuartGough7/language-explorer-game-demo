@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Parallaxer : MonoBehaviour
 {
-    public class PoolObject
+    class PoolObject
     {
         public Transform transform;
         public bool inUse;

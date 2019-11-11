@@ -37,16 +37,27 @@ public class TapController : MonoBehaviour
         if (Input.GetMouseButton(0))
         //if (Input.GetMouseButtonDown(0))
         {
+            
+             if (!tapSound.isPlaying)
+             {
+                tapSound.Play();
+             }
+
             transform.rotation = Quaternion.Lerp(transform.rotation, forwardRotation, tiltSmooth * Time.deltaTime);
             rigidBody.velocity = Vector2.zero; // If you dont add this the tap has to fight against the current velocity and wont do enough. This makes the velocity 0 and the bounce more snappy
             rigidBody.AddForce(Vector2.up * tapForce, ForceMode2D.Force); // The second argument of Force mode has an impulse option as well. Force is the default and is optional
-            //tapSound.Play();
             //transform.rotation = forwardRotation;
             //rigidBody.velocity = Vector2.zero; // If you dont add this the tap has to fight against the current velocity and wont do enough. This makes the velocity 0 and the bounce more snappy
             //rigidBody.AddForce(Vector2.up * tapForce, ForceMode2D.Force); // The second argument of Force mode has an impulse option as well. Force is the default and is optional
         }
+        else
+        {
+            if (tapSound.isPlaying)
+            {
+                tapSound.Stop();
+            }
+        }
         transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, tiltSmooth * Time.deltaTime);
-
     }
 
 
