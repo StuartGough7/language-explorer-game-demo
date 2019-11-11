@@ -868,8 +868,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 3724894733469083380, guid: dccb37f69f15a6c44b8cea6b40862aa5, type: 3}
   poolSize: 10
-  shiftSpeed: -4
-  spawnRate: 4
+  shiftSpeed: -5
+  spawnRate: 5
   ySpawnRange:
     min: -4
     max: 4
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   ySpawnRange:
     min: -0.5
     max: 0.5
-  defaultSpawnPosition: {x: 17.5, y: 0, z: 0}
+  defaultSpawnPosition: {x: 5, y: 0, z: 0}
   immediateSpawnPosition: {x: 0, y: 0, z: 0}
   targetAspectRatio: {x: 9, y: 16}
   spawnImmediate: 1
@@ -1554,11 +1554,11 @@ MonoBehaviour:
   Prefab: {fileID: 5739210244348982478, guid: 6c7407d09a07e4e4787809577742eee7, type: 3}
   poolSize: 4
   shiftSpeed: -0.2
-  spawnRate: 70
+  spawnRate: 50
   ySpawnRange:
     min: -0.5
     max: 0.5
-  defaultSpawnPosition: {x: 17.5, y: 0, z: 0}
+  defaultSpawnPosition: {x: 5, y: 0, z: 0}
   immediateSpawnPosition: {x: 0, y: 0, z: 0}
   targetAspectRatio: {x: 9, y: 16}
   spawnImmediate: 1
