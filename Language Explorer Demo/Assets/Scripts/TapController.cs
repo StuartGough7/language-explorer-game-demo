@@ -78,6 +78,8 @@ public class TapController : MonoBehaviour
         if(collision.tag == "ScoreZone")
         {
             scoreSound.Play();
+            //Destroy(collision.transform.parent.gameObject);
+            collision.transform.parent.gameObject.SetActive(false);
             OnPlayerScored(); // event sent to GameManager
         }     
         if(collision.tag == "DeadZone")
