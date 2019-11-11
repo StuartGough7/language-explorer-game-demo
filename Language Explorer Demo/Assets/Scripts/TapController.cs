@@ -10,7 +10,7 @@ public class TapController : MonoBehaviour
     public static event PlayerDelegate OnPlayerScored;
 
     public GameManager gameInstance;
-    public float tapForce = 200;
+    public float tapForce = 30;
     public float tiltSmooth = 5;
     public Vector3 starPos;
     public AudioSource tapSound;
@@ -31,15 +31,19 @@ public class TapController : MonoBehaviour
         rigidBody.simulated = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (gameInstance.GameOver) return;
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
+        //if (Input.GetMouseButtonDown(0))
         {
-            tapSound.Play();
-            transform.rotation = forwardRotation;
+            transform.rotation = Quaternion.Lerp(transform.rotation, forwardRotation, tiltSmooth * Time.deltaTime);
             rigidBody.velocity = Vector2.zero; // If you dont add this the tap has to fight against the current velocity and wont do enough. This makes the velocity 0 and the bounce more snappy
             rigidBody.AddForce(Vector2.up * tapForce, ForceMode2D.Force); // The second argument of Force mode has an impulse option as well. Force is the default and is optional
+            //tapSound.Play();
+            //transform.rotation = forwardRotation;
+            //rigidBody.velocity = Vector2.zero; // If you dont add this the tap has to fight against the current velocity and wont do enough. This makes the velocity 0 and the bounce more snappy
+            //rigidBody.AddForce(Vector2.up * tapForce, ForceMode2D.Force); // The second argument of Force mode has an impulse option as well. Force is the default and is optional
         }
         transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, tiltSmooth * Time.deltaTime);
 
