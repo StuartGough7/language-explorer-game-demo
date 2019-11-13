@@ -89,13 +89,16 @@ public class TapController : MonoBehaviour
         if(collision.tag == "ScoreZone")
         {
             scoreSound.Play();
-            //Destroy(collision.transform.parent.gameObject);
-            collision.transform.parent.gameObject.SetActive(false);
+            collision.transform.parent.position = Vector3.right* -1000; // move the game object off screen rather and let the parralaxer dispose and spawn. Separation of concerns
             OnPlayerScored(); // event sent to GameManager
         }     
         if(collision.tag == "DeadZone")
         {
             dieSound.Play();
+            if (tapSound.isPlaying)
+            {
+                tapSound.Stop();
+            }
             rigidBody.simulated = false; // freeze the character
             OnPlayerDied(); // event sent to GameManager  register dead event
         }

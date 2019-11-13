@@ -869,7 +869,7 @@ MonoBehaviour:
   Prefab: {fileID: 3724894733469083380, guid: dccb37f69f15a6c44b8cea6b40862aa5, type: 3}
   poolSize: 10
   shiftSpeed: -5
-  spawnRate: 5
+  spawnRate: 3
   ySpawnRange:
     min: -4
     max: 4
@@ -1249,7 +1249,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b5fec0ef68600b34fb62a8f7c2fb78d2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2bf8b7691cbd32145ad63456e9b93a83, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.473
   m_Pitch: 1.01
