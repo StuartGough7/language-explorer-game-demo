@@ -67,6 +67,12 @@ public class GameManager : MonoBehaviour
         SetPageState(PageState.GameOver);
     }
 
+    void Start()
+    {
+        // Sync framerate to monitors refresh rate
+        QualitySettings.vSyncCount = 1; // sets to 60fps instead of 30
+        Application.targetFrameRate = 60;
+    }
     private void Awake()
     {
         if (Instance != null)
