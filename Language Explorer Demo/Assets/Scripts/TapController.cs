@@ -10,6 +10,9 @@ public class TapController : MonoBehaviour
     public static event PlayerDelegate OnPlayerScored;
 
     public GameManager gameInstance;
+    public GameObject fireEffect;
+    public Transform thrusterObject;
+
     public float tapForce = 30;
     public float tiltSmooth = 5;
     public Vector3 starPos;
@@ -19,12 +22,14 @@ public class TapController : MonoBehaviour
 
 
     private Rigidbody2D rigidBody; // you dont need to explicitly say private
+    private ParticleSystem ps;
     Quaternion downRotation;
     Quaternion forwardRotation;
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        ps = fireEffect.GetComponent<ParticleSystem>();
         downRotation = Quaternion.Euler(0, 0, -20);
         forwardRotation = Quaternion.Euler(0, 0, 10);
         gameInstance = GameManager.Instance;
@@ -33,13 +38,15 @@ public class TapController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var emission = ps.emission;
         if (gameInstance.GameOver) return;
         if (Input.GetMouseButton(0))
         //if (Input.GetMouseButtonDown(0))
         {
-            
-             if (!tapSound.isPlaying)
+            emission.enabled = true;
+            if (!tapSound.isPlaying)
              {
+                //Instantiate(fireEffect, thrusterObject.position, Quaternion.Euler(150,90,0));
                 tapSound.Play();
              }
 
@@ -52,6 +59,7 @@ public class TapController : MonoBehaviour
         }
         else
         {
+            emission.enabled = false;
             if (tapSound.isPlaying)
             {
                 tapSound.Stop();
@@ -98,6 +106,7 @@ public class TapController : MonoBehaviour
             if (tapSound.isPlaying)
             {
                 tapSound.Stop();
+                fireEffect.SetActive(false);
             }
             rigidBody.simulated = false; // freeze the character
             OnPlayerDied(); // event sent to GameManager  register dead event
